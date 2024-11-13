@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <title> Лабораторная работа 5</title>
+        <link rel="stylesheet" href="table and form.css"/>
+        
+    </head>
+<body>
+    <div class="header">
+        <a href="Laba2_1.html">Основная страница</a>
+        <a href="page2_1.html">Позиционирование элементов</a>
+        <a href="table and form.html">Таблица</a>
+    </div>
+<table>
+<caption>Данные по странам</caption>
+<thead>
+    <tr>
+        <th>Страна</th>
+        <th>Город</th>
+        <th>Время от Москвы</th>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+        <td>Россия</td>
+        <td>Москва</td>
+        <td>0</td>
+    </tr>
+    <tr>
+        <td>США</td>
+        <td>Вашингтон</td>
+        <td>-7</td>
+    </tr>
+    <tr>
+        <td>Франция</td>
+        <td>Париж</td>
+        <td>-2</td>
+    </tr>
+    <tr>
+        <td>Германия</td>
+        <td>Берлин</td>
+        <td>-2</td>
+    </tr>
+    <tr>
+        <td>Казахстан</td>
+        <td>Астана</td>
+        <td>+2</td>
+    </tr>
+    <tr>
+        <td>Испания</td>
+        <td>Мадрид</td>
+        <td>-2</td>
+    </tr>
+</tbody> 
+</table>
+
+<div class="form">
+    <h2>Ввод новой информации</h2>
+    <form id="form">
+        <fieldset>
+            <label for="country">Страна:</label>
+            <legend>Столицы различных стран</legend>
+            <input type="text" id="country" name="country" required>
+            <br>
+            <label for="capital">Столица:</label>
+            <input type="text" id="capital" name="capital" required>
+            <br>
+            <label for="time">Время от Москвы:</label>
+            <input type="number" id="time" name="time" min="-10" max="10" step="1" value="0">
+            <br>
+            <button type="submit">Добавить</button>
+        </fieldset>
+    </form>
+</div> 
+<script>
+    $(function() {
+        $("#form").submit(function (event) {
+            event.preventDefault(); 
+            var form = event.target;
+            var formData = new FormData(form);
+            var studentData = Object.fromEntries(formData.entries());
+            var newRow = `
+                <tr>
+                    <td>${studentData.id}</td>
+                    <td>${studentData.name}</td>
+                    <td>${studentData.studentBook}</td>
+                    <td>${studentData.group}</td>
+                    <td>${studentData.gender}</td>
+                    <td>${studentData.age}</td>
+                    <td>${studentData.admissionForm}</td>
+                    <td>${studentData.direction}</td>
+                </tr>
+            `;
+            $("#table").append(newRow);
+            form.reset();
+        });
+    });
+</script>
+
+
+</body>
+</html>
